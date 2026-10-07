@@ -1,0 +1,36 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# test artifacts
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# misc
+.DS_Store
+*.log
+tmp/
+.turbo/
+
+# docker volumes (local)
+infra/.data/

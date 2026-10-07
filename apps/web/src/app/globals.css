@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Fonts. In production swap to next/font — these variables are the only
+     integration point. System fallbacks keep builds network-free. */
+  --font-display: 'Archivo', 'Helvetica Neue', 'SF Pro Display', Arial, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Studio light-mode tokens (default — the whole product lives here) */
+  --bg-page: #f5f2eb; /* warm cream */
+  --bg-surface: #ffffff;
+  --bg-elevated: #fbf9f4;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6b66;
+  --text-muted: #a3a098;
+  --border: #e8e3d8;
+  --border-card: #efebe2;
+
+  --accent: #ffd60a; /* yellow */
+  --accent-hover: #f5c400;
+  --shape-orange: #ff8a3d;
+  --shape-yellow: #ffe08a;
+
+  --success: #30d158;
+  --danger: #ff453a;
+  --warning: #ff9f0a;
+  --info: #0a84ff;
+  --dropzone-active: #fff7d6;
+
+  /* Dark (app chrome / settings only) */
+  --bg-dark: #161617;
+  --bg-dark-card: #1f1f21;
+  --border-dark: #2e2e30;
+  --text-on-dark: #f5f5f7;
+  --text-dim: #98989d;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 2px 6px rgba(29, 29, 31, 0.05), 0 16px 40px rgba(29, 29, 31, 0.07);
+  --shadow-float: 0 24px 60px rgba(29, 29, 31, 0.12);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display font (Archivo) on all headings — Studio uses heavy display type */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ---- Studio component utilities ---- */
+@layer components {
+  /* Display headlines use Archivo, tight tracking */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Yellow accent dot that marks the brand — one per headline, max */
+  .accent-dot {
+    color: var(--accent);
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  /* Primary CTA: solid yellow pill, black text, no gradient, soft warm shadow */
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: #1d1d1f;
+    font-weight: 700;
+    padding: 0.875rem 1.75rem;
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease;
+  }
+  .btn-cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
+  .btn-cta:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary action: plain black text link with an arrow — no button chrome.
+     Used for the primary "secondary" action on cream (hero, sections). */
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: gap 0.15s ease;
+  }
+  .btn-link:hover {
+    gap: 0.6rem;
+  }
+
+  /* In-app secondary button (inside white surfaces/cards only): white pill with
+     a hairline ring. Never used as a ghost button on the cream canvas. */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    border: 1px solid var(--border);
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+  .btn-secondary:hover {
+    border-color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Tool tile: white card, thin ring; hover darkens border + lifts */
+  .tool-tile {
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-card);
+    padding: 1.5rem;
+    transition:
+      border-color 0.18s ease,
+      box-shadow 0.18s ease,
+      transform 0.18s ease;
+  }
+  .tool-tile:hover {
+    border-color: var(--text-primary);
+    box-shadow: var(--shadow-float);
+    transform: translateY(-3px);
+  }
+
+  /* Monochrome glyph icon chip (near-black) */
+  .icon-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    border: 1px solid var(--border-card);
+  }
+
+  /* Small yellow icon chip variant */
+  .icon-chip-yellow {
+    background: var(--shape-yellow);
+    color: #1d1d1f;
+    border-color: transparent;
+  }
+
+  .card-surface {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Feature tab pill */
+  .tab-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    padding: 0.625rem 1.125rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    transition: all 0.15s ease;
+  }
+  .tab-pill[aria-selected='true'] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1d1d1f;
+  }
+
+  /* "What's new" / New-tool badge */
+  .badge-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: #1d1d1f;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.625rem;
+  }
+}
+
+/* Keyboard focus — WCAG visible focus ring */
+:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* RTL readiness */
+[dir='rtl'] .flip-rtl {
+  transform: scaleX(-1);
+}

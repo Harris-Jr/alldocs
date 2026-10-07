@@ -1,0 +1,35 @@
+{
+  "name": "@alldocs/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test": "echo 'web: run test:e2e for playwright'"
+  },
+  "dependencies": {
+    "@alldocs/config": "workspace:*",
+    "@alldocs/pdf-core": "workspace:*",
+    "next": "14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "pdfjs-dist": "4.7.76",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.454.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@playwright/test": "^1.48.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  }
+}
